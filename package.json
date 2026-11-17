@@ -1,0 +1,21 @@
+{
+  "name": "life-safety-inspection",
+  "version": "0.2.0",
+  "private": true,
+  "description": "응다비:룸 — AI 설문·현장조사 플랫폼",
+  "scripts": {
+    "build": "node scripts/build-public.mjs",
+    "test:submission-security": "node --test tests/submission-security.test.mjs",
+    "dev": "netlify dev",
+    "dev:mock": "node scripts/dev-mock-server.js",
+    "check:functions": "node --check netlify/functions/api.mjs && node --check netlify/functions/api-legacy.cjs",
+    "check:landing": "node --check assets/landing/landing.js && node --check assets/landing/scroll-gate.js && node --check assets/landing/login-modal.js && node --check scripts/verify-login-modal.cjs && node --check scripts/verify-landing.cjs && node --check scripts/verify-landing-scroll.cjs && node --check scripts/verify-landing-motion.cjs",
+    "test:landing": "node --test tests/landing-scroll.test.js tests/entry-routes.test.js",
+    "test:api": "node --test tests/api-checklist-templates.test.js tests/ai-connection.test.js tests/ai-status.test.js tests/v8-data.test.js tests/analysis-crosstab.test.js tests/analysis-run.test.js tests/stats-templates.test.js tests/analysis-report.test.js tests/analysis-recommend.test.js",
+    "seed:master": "node scripts/generate-demo-institutions.mjs",
+    "seed:institutions": "node scripts/generate-supabase-seed.mjs"
+  },
+  "engines": {
+    "node": ">=22.23.4 <23 || >=24.22.1 <25"
+  }
+}

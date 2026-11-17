@@ -1,0 +1,72 @@
+응다비:룸 — AI 설문·현장조사 플랫폼
+Copyright 2026 독거노인종합지원센터
+
+참가 기관: 독거노인종합지원센터
+
+1. Source code
+
+Unless otherwise noted, HTML, CSS, JavaScript, Netlify Functions,
+database schemas, tests, automation scripts, and generic SVG assets are
+licensed under the Apache License, Version 2.0. See the LICENSE file.
+
+2. Documentation and prompts
+
+Unless otherwise noted, planning documents, manuals, guides, prompts,
+and instructions are licensed under the Creative Commons Attribution
+4.0 International License. See the LICENSE-DOCS file.
+
+Embedded prompt scope: the project-authored natural-language instructions
+sent to AI models and the sentence portions of prompt templates in these
+files are licensed under CC BY 4.0:
+- netlify/functions/api-legacy.cjs
+- netlify/functions/lib/analysis-report.js
+- netlify/functions/lib/analysis-recommend.js
+- netlify/functions/lib/account-ai.js
+
+The remaining software implementation in these files, including execution
+logic, API calls, data processing, validation, and template interpolation
+mechanisms, is licensed under Apache-2.0. This is a content-specific scope
+within each file, not a choice between two licenses for the whole file.
+User input, attachments, and survey data inserted at runtime are not granted
+any new license by this notice. Prior valid grants remain unaffected.
+
+3. Demonstration checklist content
+
+The fall, depression, and memory checklist questions included in this
+repository are independently written fictional demonstration content.
+They are not validated medical or clinical diagnostic instruments.
+
+4. Excluded materials
+
+Personal information, beneficiary data, institution operating data,
+credentials, API keys, secrets, and third-party materials without
+redistribution permission are not included in the licensed materials.
+
+For this distribution, the following presentation and branding materials
+are not covered by the blanket Apache-2.0 / CC BY 4.0 grants above:
+- (독거노인종합지원센터) 응다비룸 본선발표_v7.pdf
+- images/readme-banner.png and images/image1.png
+- The demonstration video linked from README.md (hosted as a GitHub attachment)
+- Brand artwork in assets/ai-safety-check-logo.svg,
+  assets/eungdabiroom-logo.svg, assets/landing/brand.svg,
+  assets/landing/mascot.svg, assets/logo-header/logo-header-static.svg,
+  assets/logo-header/logo-header-white.gif, and
+  assets/logo-header/logo-header-transparent.gif
+- Embedded brand artwork in assets/logo-header/logo-header.js;
+  the JavaScript implementation itself remains Apache-2.0.
+
+Check separate permissions and applicable rights before reusing these
+materials. This notice does not claim ownership of third-party content,
+does not replace third-party licenses, and does not revoke permissions
+already validly granted for earlier distributions. In particular, earlier
+Apache-2.0 or CC BY grants remain effective according to their terms.
+General-purpose SVG assets, third-party icons, and fonts are not excluded
+merely because they are images. Trademark or endorsement permission is
+not implied by the source code license. The exclusions above do not remove
+any statutory exceptions or limitations to copyright.
+
+5. Third-party components
+
+Third-party components remain subject to their respective licenses.
+See THIRD_PARTY_NOTICES.md and any license file distributed with the
+corresponding component.

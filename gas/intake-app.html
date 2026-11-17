@@ -1,0 +1,289 @@
+const intakeInstitutionMaster = window.INSTITUTION_MASTER || [];
+const DEFAULT_INTAKE_AGENCY_CODE = intakeInstitutionMaster.find((item) => item.type === "agency")?.code || "SAMPLEAG001";
+const DEFAULT_INTAKE_PASSWORD = "";
+
+function requestAgencyCode() {
+  return new URLSearchParams(location.search).get("agency") || DEFAULT_INTAKE_AGENCY_CODE;
+}
+
+function resolveIntakeAgency() {
+  const code = requestAgencyCode().toUpperCase();
+  return (
+    intakeInstitutionMaster.find((item) => item.code === code) ||
+    intakeInstitutionMaster.find((item) => item.code === DEFAULT_INTAKE_AGENCY_CODE) || {
+      code: DEFAULT_INTAKE_AGENCY_CODE,
+      name: "가상 수행기관 001",
+      sido: "가상특별시",
+      sigungu: "가상구 A",
+      type: "agency",
+    }
+  );
+}
+
+const intakeAgency = resolveIntakeAgency();
+
+const intakeChecklistDefs = {
+  fall: {
+    label: "낙상 체크리스트",
+    max: 100,
+    options: [
+      { label: "예", value: 5 },
+      { label: "아니오", value: 0 },
+      { label: "미해당", value: 0 },
+    ],
+    questions: [
+      "출입문 주변의 이동 공간이 좁아 몸이나 보행 보조기구가 걸릴 수 있다.",
+      "신발이나 생활용품이 출입 동선 바닥에 놓여 있다.",
+      "방과 복도 사이의 바닥 높이가 달라 발이 걸릴 수 있다.",
+      "바닥 매트나 작은 깔개가 쉽게 밀리거나 들려 있다.",
+      "전선이나 충전선이 사람이 자주 다니는 길을 가로지른다.",
+      "가구 사이 통로가 좁거나 모서리를 피해서 이동하기 어렵다.",
+      "자주 쓰는 물건이 손이 닿기 어려운 높은 곳에 보관되어 있다.",
+      "조리 공간 바닥에 물기나 기름기가 남아 있는 경우가 있다.",
+      "세면 또는 목욕 후 욕실 바닥의 물기가 오래 남는다.",
+      "변기나 샤워 공간에서 몸을 지지할 고정된 부분이 부족하다.",
+      "침실에서 화장실로 이동하는 야간 동선이 어둡다.",
+      "누운 상태나 앉은 상태에서 가까운 조명을 바로 켜기 어렵다.",
+      "계단의 높이가 고르지 않거나 디딤면에 물건이 놓여 있다.",
+      "계단이나 경사진 곳에서 안정적으로 잡을 수 있는 부분이 부족하다.",
+      "침대나 의자의 높이가 맞지 않아 앉고 일어날 때 몸이 흔들린다.",
+      "자리에서 일어날 때 지지할 가구나 보조기구가 가까이 없다.",
+      "실내에서 발에 고정되지 않는 슬리퍼나 미끄러운 양말을 착용한다.",
+      "이동할 때 바닥에 닿을 정도로 긴 옷을 입는 경우가 있다.",
+      "시야가 흐린 상황에서도 안경이나 필요한 시각 보조도구를 사용하지 않는다.",
+      "어지러움이나 다리 힘 빠짐을 느껴도 곧바로 이동하는 경우가 있다.",
+    ],
+  },
+  depression: {
+    label: "우울 체크리스트",
+    max: 27,
+    options: [
+      { label: "없음", value: 0 },
+      { label: "2~3일 이상", value: 1 },
+      { label: "7일 이상", value: 2 },
+      { label: "거의 매일", value: 3 },
+    ],
+    questions: [
+      "최근 일상에서 마음이 평소보다 무겁게 느껴진 날이 있었다.",
+      "계획했던 일을 시작하는 과정이 유난히 부담스럽게 느껴졌다.",
+      "평소 즐기던 활동을 찾거나 참여하는 횟수가 줄었다.",
+      "가족이나 지인과 대화하거나 연락하는 일을 피하고 싶었다.",
+      "하루의 생활 리듬을 일정하게 유지하기가 어려웠다.",
+      "잠을 자거나 쉬어도 충분히 회복되었다는 느낌이 적었다.",
+      "식사, 정리, 외출 준비 같은 기본적인 생활 관리를 미룬 적이 있었다.",
+      "작은 선택이나 결정을 내리는 일도 크게 부담스럽게 느껴졌다.",
+      "가까운 미래의 일을 긍정적으로 기대하기 어려웠다.",
+    ],
+  },
+  memory: {
+    label: "기억 체크리스트",
+    max: 14,
+    options: [
+      { label: "아니오", value: 0 },
+      { label: "네", value: 1 },
+    ],
+    questions: [
+      "가까운 날짜의 일정도 메모하지 않으면 지나치는 경우가 있습니까?",
+      "방금 들은 안내를 다시 물어본 경우가 있습니까?",
+      "어떤 일을 하려고 방에 들어간 뒤 목적을 잊은 적이 있습니까?",
+      "자주 쓰는 물건을 평소와 다른 곳에 두고 오래 찾은 적이 있습니까?",
+      "하던 일이 중단된 뒤 무엇을 하고 있었는지 떠올리기 어려운 경우가 있습니까?",
+      "메모 없이 장을 보면 사려던 물건을 빠뜨리는 경우가 있습니까?",
+      "익숙한 장소에서도 표지나 방향을 잠시 혼동한 적이 있습니까?",
+      "대화를 마친 뒤 이야기의 순서를 떠올리기 어려운 경우가 있습니까?",
+      "같은 내용을 이미 물어본 사실을 모르고 다시 질문한 적이 있습니까?",
+      "가전제품이나 조리기구를 껐는지 확신하지 못해 다시 확인한 적이 있습니까?",
+      "정해진 납부일이나 복약 시간을 놓친 적이 있습니까?",
+      "알고 지내던 사람의 이름이 바로 떠오르지 않아 곤란한 적이 있습니까?",
+      "오늘 날짜나 요일을 잘못 알고 있었던 적이 있습니까?",
+      "기억의 변화 때문에 평소 생활 절차를 수행하는 데 불편을 느낀 적이 있습니까?",
+    ],
+  },
+};
+
+let selectedChecklistType = "";
+let selectedAnswers = [];
+
+const $ = (selector) => document.querySelector(selector);
+
+function showToast(message) {
+  const toast = $("#toast");
+  toast.textContent = message;
+  toast.classList.add("is-visible");
+  window.setTimeout(() => toast.classList.remove("is-visible"), 2200);
+}
+
+function agencyPassword() {
+  return localStorage.getItem(`lifeSafetyAgencyPassword:${intakeAgency.code}`) || DEFAULT_INTAKE_PASSWORD;
+}
+
+function showStep(stepId) {
+  document.querySelectorAll(".worker-step").forEach((step) => step.classList.remove("is-active"));
+  $(stepId).classList.add("is-active");
+}
+
+function renderPicker() {
+  $("#checklistPicker").innerHTML = Object.entries(intakeChecklistDefs)
+    .map(
+      ([type, def]) => `
+        <button class="checklist-choice" type="button" data-checklist-type="${type}">
+          <strong>${def.label}</strong>
+          <span>${def.questions.length}문항</span>
+        </button>`
+    )
+    .join("");
+}
+
+function renderQuestions(type) {
+  selectedChecklistType = type;
+  const def = intakeChecklistDefs[type];
+  selectedAnswers = def.questions.map(() => "");
+  $("#selectedChecklistTitle").textContent = def.label;
+  $("#selectedScaleMax").textContent = `${def.questions.length}문항`;
+  $("#fieldMemo").value = "";
+  $("#workerQuestionList").innerHTML = def.questions
+    .map(
+      (question, index) => `
+        <section class="worker-question">
+          <strong>${index + 1}. ${question}</strong>
+          <div class="worker-options">
+            ${def.options
+              .map(
+                (option) => `
+                  <button class="worker-option" type="button"
+                    data-question-index="${index}" data-answer="${option.label}">
+                    ${option.label}
+                  </button>`
+              )
+              .join("")}
+          </div>
+        </section>`
+    )
+    .join("");
+  updateScore();
+  showStep("#questionStep");
+}
+
+function optionScore(type, answer) {
+  const option = intakeChecklistDefs[type].options.find((item) => item.label === answer);
+  return option ? option.value : 0;
+}
+
+function totalScore() {
+  return selectedAnswers.reduce((sum, answer) => sum + optionScore(selectedChecklistType, answer), 0);
+}
+
+function updateScore() {
+  $("#workerTotalScore").textContent = totalScore();
+}
+
+function validateWorkerInfo() {
+  if (!$("#workerNameInput").value.trim()) {
+    showToast("조사자 이름을 입력해 주세요.");
+    return false;
+  }
+  if (!$("#workerPhoneInput").value.trim()) {
+    showToast("조사자 전화번호를 입력해 주세요.");
+    return false;
+  }
+  if (!$("#clientNameInput").value.trim()) {
+    showToast("대상자 성명을 입력해 주세요.");
+    return false;
+  }
+  if (!$("#clientGenderInput").value) {
+    showToast("대상자 성별을 선택해 주세요.");
+    return false;
+  }
+  if (!$("#clientBirthInput").value) {
+    showToast("대상자 생년월일을 입력해 주세요.");
+    return false;
+  }
+  return true;
+}
+
+function submitChecklist() {
+  if (!selectedChecklistType) return;
+  const unansweredIndex = selectedAnswers.findIndex((answer) => !answer);
+  if (unansweredIndex >= 0) {
+    showToast(`${unansweredIndex + 1}번 문항을 선택해 주세요.`);
+    return;
+  }
+
+  const submitted = {
+    id: `worker-${Date.now()}`,
+    agencyCode: intakeAgency.code,
+    agencyName: intakeAgency.name,
+    workerName: $("#workerNameInput").value.trim(),
+    workerPhone: $("#workerPhoneInput").value.trim(),
+    clientName: $("#clientNameInput").value.trim(),
+    clientGender: $("#clientGenderInput").value,
+    clientBirth: $("#clientBirthInput").value,
+    checklistType: selectedChecklistType,
+    score: totalScore(),
+    max: intakeChecklistDefs[selectedChecklistType].max,
+    answers: selectedAnswers,
+    memo: $("#fieldMemo").value.trim(),
+    submittedAt: new Date().toISOString(),
+    status: "확인 대기",
+  };
+  const stored = JSON.parse(localStorage.getItem("lifeSafetyWorkerSubmissions") || "[]");
+  stored.unshift(submitted);
+  localStorage.setItem("lifeSafetyWorkerSubmissions", JSON.stringify(stored));
+
+  selectedChecklistType = "";
+  selectedAnswers = [];
+  showToast("체크리스트를 제출했습니다.");
+  showStep("#selectStep");
+}
+
+function formatPhoneNumber(value) {
+  const digits = value.replace(/\D/g, "").slice(0, 11);
+  if (digits.length <= 3) return digits;
+  if (digits.length <= 7) return `${digits.slice(0, 3)}-${digits.slice(3)}`;
+  return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+}
+
+$("#verifyAgencyPassword").addEventListener("click", () => {
+  if ($("#workerAgencyPassword").value !== agencyPassword()) {
+    showToast("기관 비밀번호를 확인해 주세요.");
+    return;
+  }
+  showStep("#selectStep");
+});
+
+$("#checklistPicker").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-checklist-type]");
+  if (!button || !validateWorkerInfo()) return;
+  renderQuestions(button.dataset.checklistType);
+});
+
+$("#workerQuestionList").addEventListener("click", (event) => {
+  const button = event.target.closest(".worker-option");
+  if (!button) return;
+  const questionIndex = Number(button.dataset.questionIndex);
+  selectedAnswers[questionIndex] = button.dataset.answer;
+  button.parentElement.querySelectorAll(".worker-option").forEach((option) => option.classList.remove("is-selected"));
+  button.classList.add("is-selected");
+  updateScore();
+});
+
+document.querySelectorAll(".gender-choice").forEach((button) => {
+  button.addEventListener("click", () => {
+    $("#clientGenderInput").value = button.dataset.clientGender;
+    document.querySelectorAll(".gender-choice").forEach((item) => {
+      const selected = item === button;
+      item.classList.toggle("is-selected", selected);
+      item.setAttribute("aria-checked", String(selected));
+    });
+  });
+});
+
+$("#workerPhoneInput").addEventListener("input", (event) => {
+  event.target.value = formatPhoneNumber(event.target.value);
+});
+
+$("#backToSelect").addEventListener("click", () => showStep("#selectStep"));
+$("#submitChecklist").addEventListener("click", submitChecklist);
+
+renderPicker();
+$("#workerAgencyName").textContent = intakeAgency.name;

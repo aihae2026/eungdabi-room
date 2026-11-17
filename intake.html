@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>응다비룸 체크리스트 제출</title>
+    <link rel="stylesheet" href="assets/styles.css?v=intake-institution-lookup-v2" />
+    <link rel="stylesheet" href="assets/eungdabiroom-v8.css?v=r9" />
+    <link rel="stylesheet" href="assets/intake-theme.css?v=landing-style-1" />
+  </head>
+  <body class="worker-body">
+    <main class="worker-screen">
+      <section class="worker-card">
+        <img class="worker-logo" src="assets/eungdabiroom-logo.svg" alt="응다비룸" />
+        <div class="worker-title">
+          <p class="eyebrow" id="workerAgencyName">가상 기관담당자 001</p>
+          <h1>응다비룸 설문 응답</h1>
+        </div>
+
+        <section class="worker-step is-active" id="passwordStep">
+          <p class="worker-access-message is-hidden" id="intakeAccessMessage"></p>
+          <label class="stacked-field">
+            <span>조사자용 접속링크 비밀번호</span>
+            <input id="workerAgencyPassword" type="password" placeholder="접속링크 비밀번호 입력" autocomplete="current-password" disabled />
+          </label>
+          <button class="primary-button full-button" id="verifyAgencyPassword" type="button" disabled>접속하기</button>
+        </section>
+
+        <section class="worker-step" id="selectStep">
+          <div class="field-grid single">
+            <div class="worker-info-group worker-info-group-investigator">
+            <label>
+              <span>조사자 이름</span>
+              <input id="workerNameInput" type="text" placeholder="조사자 이름" />
+            </label>
+            <label>
+              <span>조사자 전화번호</span>
+              <input id="workerPhoneInput" type="tel" inputmode="numeric" placeholder="010-0000-0000" />
+            </label>
+            </div>
+
+            <div class="worker-info-group worker-info-group-client">
+            <div>
+              <div class="worker-client-name-heading"><label for="clientNameInput">대상자 성명</label><label class="worker-same-name"><input id="sameAsWorker" type="checkbox" /> 조사자와 동일함</label></div>
+              <input id="clientNameInput" type="text" placeholder="대상자 성명" lang="ko" inputmode="text" autocomplete="off" autocapitalize="off" spellcheck="false" />
+            </div>
+            <label>
+              <span>대상자 성별</span>
+              <input id="clientGenderInput" type="hidden" />
+              <div class="gender-choice-group" role="radiogroup" aria-label="대상자 성별">
+                <button class="gender-choice" type="button" data-client-gender="여" role="radio" aria-checked="false">여</button>
+                <button class="gender-choice" type="button" data-client-gender="남" role="radio" aria-checked="false">남</button>
+              </div>
+            </label>
+            <label>
+              <span>대상자 생년월일</span>
+              <input id="clientBirthInput" type="hidden" />
+              <div class="birth-date-fields" aria-label="대상자 생년월일">
+                <div class="birth-year-field">
+                  <input id="clientBirthYearInput" type="text" inputmode="numeric" maxlength="4" pattern="\d{4}" placeholder="1954" aria-label="생년" autocomplete="off" />
+                  <span>년</span>
+                </div>
+                <select id="clientBirthMonthInput" aria-label="월">
+                  <option value="">월</option>
+                </select>
+                <select id="clientBirthDayInput" aria-label="일">
+                  <option value="">일</option>
+                </select>
+              </div>
+            </label>
+            </div>
+          </div>
+
+          <div class="checklist-picker" id="checklistPicker"></div>
+          <button class="secondary-button full-button worker-exit-button" id="resetClientInfo" type="button">다른 대상자 조사하기</button>
+        </section>
+
+        <section class="worker-step" id="questionStep">
+          <div class="worker-question-sticky">
+            <div class="question-head">
+              <button class="secondary-button" id="backToSelect" type="button">목록으로</button>
+              <div>
+                <p class="eyebrow" id="selectedScaleMax">0점 만점</p>
+                <h2 id="selectedChecklistTitle">체크리스트</h2>
+              </div>
+            </div>
+            <div class="worker-answer-progress" id="workerAnswerProgress" role="status" aria-live="polite">응답 0 / 전체 0문항</div>
+            <div class="worker-score">
+              <span>현재 합계점수</span>
+              <strong id="workerTotalScore">0</strong>
+            </div>
+          </div>
+          <div class="worker-question-list" id="workerQuestionList"></div>
+          <label class="stacked-field">
+            <span>현장 메모 <em>(선택)</em></span>
+            <textarea id="fieldMemo" rows="4" placeholder="현장에서 확인한 특이사항을 입력하세요."></textarea>
+          </label>
+          <button class="primary-button full-button" id="submitChecklist" type="button">제출</button>
+        </section>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="assets/institutions.js?v=institution-management-v1"></script>
+    <script src="assets/intake.js?v=intake-institution-lookup-v2"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+window.INSTITUTION_MASTER = [
+  {
+    "sido": "가상특별시",
+    "sigungu": "*광역지원기관",
+    "code": "SAMPLEREG01",
+    "name": "가상광역지원기관 A",
+    "type": "regional",
+    "parentCode": "SAMPLECENTRAL",
+    "active": true
+  },
+  {
+    "sido": "가상특별시",
+    "sigungu": "가상구 A",
+    "code": "SAMPLEAG001",
+    "name": "가상 수행기관 001",
+    "type": "agency",
+    "parentCode": "SAMPLEREG01",
+    "active": true
+  },
+  {
+    "sido": "가상특별시",
+    "sigungu": "가상구 B",
+    "code": "SAMPLEAG002",
+    "name": "가상 수행기관 002",
+    "type": "agency",
+    "parentCode": "SAMPLEREG01",
+    "active": true
+  },
+  {
+    "sido": "가상특별시",
+    "sigungu": "가상구 C",
+    "code": "SAMPLEAG003",
+    "name": "가상 수행기관 003",
+    "type": "agency",
+    "parentCode": "SAMPLEREG01",
+    "active": true
+  },
+  {
+    "sido": "가상광역도",
+    "sigungu": "*광역지원기관",
+    "code": "SAMPLEREG02",
+    "name": "가상광역지원기관 B",
+    "type": "regional",
+    "parentCode": "SAMPLECENTRAL",
+    "active": true
+  },
+  {
+    "sido": "가상광역도",
+    "sigungu": "가상시 A",
+    "code": "SAMPLEAG004",
+    "name": "가상 수행기관 004",
+    "type": "agency",
+    "parentCode": "SAMPLEREG02",
+    "active": true
+  },
+  {
+    "sido": "가상광역도",
+    "sigungu": "가상시 B",
+    "code": "SAMPLEAG005",
+    "name": "가상 수행기관 005",
+    "type": "agency",
+    "parentCode": "SAMPLEREG02",
+    "active": true
+  },
+  {
+    "sido": "가상광역도",
+    "sigungu": "가상군 C",
+    "code": "SAMPLEAG006",
+    "name": "가상 수행기관 006",
+    "type": "agency",
+    "parentCode": "SAMPLEREG02",
+    "active": true
+  }
+];

@@ -1,0 +1,81 @@
+/* Intake-only visual theme, aligned with the landing page's response example. */
+body.worker-body {
+  --worker-primary: #1f4039;
+  --worker-primary-bright: #4b9388;
+  --worker-secondary: #78a99a;
+  --worker-text: #233e37;
+  --worker-muted: #60736b;
+  --worker-line: #d8e2d5;
+  --worker-line-strong: #82968a;
+  --worker-card: #fffefa;
+  --worker-card-soft: #fffefa;
+  --worker-card-high: #edf4e9;
+  background: #f8f7f2;
+  color: var(--worker-text);
+  font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+}
+.worker-body .worker-screen { padding: 32px 20px 56px; }
+.worker-body .worker-card {
+  width: min(100%, 640px);
+  padding: 32px;
+  gap: 26px;
+  border: 1px solid var(--worker-line);
+  border-radius: 32px;
+  background: var(--worker-card);
+  box-shadow: 12px 14px 0 #e8f0e4;
+}
+.worker-body .worker-card::before { display: none; }
+.worker-body .worker-logo { width: 230px; max-width: 78%; margin: 0; }
+.worker-body .worker-title .eyebrow {
+  background: #edf4e9; border-color: var(--worker-line);
+  color: #42796e; box-shadow: none; font-size: 14px; padding: 6px 12px;
+}
+.worker-body .worker-title h1 { font-family: inherit; font-size: 30px; line-height: 1.45; letter-spacing: -1px; font-weight: 800; }
+.worker-body #passwordStep,
+.worker-body .worker-info-group { border: 1px solid var(--worker-line); background: #f6f8f1; box-shadow: none; backdrop-filter: none; }
+.worker-body .worker-info-group-client { background: #fffefa; }
+.worker-body input:focus, .worker-body select:focus, .worker-body textarea:focus {
+  border-color: #4b9388; box-shadow: 0 0 0 3px #4b938825;
+}
+.worker-body input[type="checkbox"] { accent-color: var(--worker-primary); }
+.worker-body .primary-button { background: var(--worker-primary); box-shadow: none; border-radius: 18px; font-weight: 700; }
+.worker-body .primary-button:hover { background: #315e53; }
+.worker-body .secondary-button { background: #fffefa; border-color: var(--worker-line); border-radius: 16px; font-weight: 700; }
+.worker-body .gender-choice { background: #fffefa; font-weight: 600; }
+.worker-body .gender-choice.is-selected { background: #e8f0e4; color: var(--worker-primary); box-shadow: 0 0 0 2px #4b938820; }
+.worker-body .checklist-choice, .worker-body .dynamic-checklist-choice {
+  background: #fffefa; border-color: var(--worker-line); box-shadow: none;
+}
+.worker-body .checklist-choice:hover { background: #edf4e9; }
+.worker-body .worker-question-sticky { top: 0; background: #fffefa; backdrop-filter: none; border-bottom: 1px solid var(--worker-line); }
+.worker-body .question-head h2 { font-family: inherit; font-size: 24px; line-height: 1.45; }
+.worker-body .question-head .eyebrow { color: #42796e; }
+.worker-body .question-head .secondary-button { min-height: 44px; padding: 8px 12px; font-size: 14px; }
+.worker-body .worker-answer-progress { background: #e8f0e4; color: #315e53; border-radius: 12px; }
+.worker-body .worker-score { min-height: 52px; padding: 10px 16px; background: #f5f7f0; border-radius: 14px; }
+.worker-body .worker-score strong { font-size: 26px; }
+.worker-body .worker-question-list { gap: 24px; }
+.worker-body .worker-question { padding: 24px 0; border: 0; border-bottom: 1px solid var(--worker-line); border-radius: 0; background: transparent; box-shadow: none; }
+.worker-body .worker-question strong { font-size: 24px; line-height: 1.55; font-weight: 750; letter-spacing: -.5px; }
+.worker-body .worker-option {
+  display: flex; align-items: center; padding: 16px 18px; min-height: 64px;
+  border-radius: 18px; background: #fffefa; color: var(--worker-text);
+  font-size: 20px; font-weight: 500; line-height: 1.5;
+}
+.worker-body .worker-option::before { width: 22px; height: 22px; border-width: 1.5px; }
+.worker-body .worker-option[data-multiple="true"]::before { border-radius: 6px; }
+.worker-body .worker-option.is-selected { background: #e8f0e4; color: #1f4039; border-color: #4b9388; }
+.worker-body .worker-option:focus-visible { outline: 3px solid #4b9388; outline-offset: 3px; }
+.worker-body .worker-option-text-wrap { background: #f5f7f0; border-color: var(--worker-line); }
+.worker-body .worker-required.is-optional { background: #edf1e9; color: #60736b; }
+.worker-body .worker-required.is-required { background: #fff0da; color: #875820; }
+@media (max-width: 600px) {
+  .worker-body .worker-screen { padding: 16px 12px 32px; }
+  .worker-body .worker-card { padding: 24px 18px; border-radius: 26px; box-shadow: 5px 7px 0 #e8f0e4; gap: 22px; }
+  .worker-body .worker-title h1 { font-size: 26px; }
+  .worker-body .worker-info-group, .worker-body #passwordStep { padding: 16px; }
+  .worker-body .worker-question strong { font-size: 22px; }
+  .worker-body .worker-option { padding: 14px; font-size: 18px; }
+  .worker-body .birth-date-fields { gap: 6px; }
+  .worker-body .birth-date-fields input, .worker-body .birth-date-fields select { padding-left: 6px; padding-right: 6px; font-size: 16px; }
+}

@@ -1,0 +1,69 @@
+/* V8 visual system mapped to the production DOM. Keep existing view and API IDs. */
+:root{--ink:#24272d;--muted:#666d78;--line:#e9ebef;--soft:#f7f8fa;--admin-page:#fff;--admin-panel:#fff;--admin-ink:#24272d;--admin-muted:#666d78;--admin-line:#e9ebef;--admin-panel-low:#f7f8fa}
+body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;font-size:16px;line-height:1.65}
+body[data-role=central]{--accent:#465be5;--accent-soft:#f0f2ff;--admin-primary:#465be5;--admin-secondary:#465be5;--green:#465be5;--teal:#465be5}
+body[data-role=regional]{--accent:#7555b8;--accent-soft:#f5f1fc;--admin-primary:#7555b8;--admin-secondary:#7555b8;--green:#7555b8;--teal:#7555b8}
+body[data-role=agency]{--accent:#18776b;--accent-soft:#eef8f5;--admin-primary:#18776b;--admin-secondary:#18776b;--green:#18776b;--teal:#18776b}
+body:not(.worker-body) .app-shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100dvh}
+body:not(.worker-body) .sidebar{display:flex;flex-direction:column;position:sticky;top:0;height:100dvh;min-height:0;padding:32px 24px 20px;background:#f9fafc;border-right:1px solid var(--line);box-shadow:none}
+body:not(.worker-body) .brand{margin:0 0 32px;padding:0}
+body:not(.worker-body) .brand-logo{display:block;height:56px;width:auto;max-width:100%;padding:0;object-fit:contain}
+body:not(.worker-body) .nav-tabs{display:flex;flex-direction:column;gap:8px}
+body:not(.worker-body) .nav-tab{min-height:48px;padding:11px 12px;border:1px solid transparent;border-radius:9px;font-size:15px;color:#666d78;text-align:left;white-space:normal;line-height:1.55;box-shadow:none;transform:none}
+body:not(.worker-body) .nav-tab.is-active{background:var(--accent-soft,#eef8f5);color:var(--accent,#18776b);border-color:var(--accent,#18776b);box-shadow:none}
+body:not(.worker-body) .nav-tab:hover{background:var(--accent-soft,#eef8f5);transform:none}
+body:not(.worker-body) .workspace{padding:28px 32px 48px;min-width:0;background:#fff}
+body:not(.worker-body) .topbar{position:static;margin:0 0 32px;padding:0;background:#fff;border:0;backdrop-filter:none}
+body:not(.worker-body) h1{font-size:34px;letter-spacing:-1px;line-height:1.4}
+body:not(.worker-body) h2{font-size:21px;letter-spacing:-.4px;line-height:1.5}
+body:not(.worker-body) .panel{padding:24px;border:1px solid #e4e7ef;border-radius:14px;box-shadow:none;background:#fff}
+body:not(.worker-body) .summary-card{border:0;border-radius:16px;background:#f7f8fa;box-shadow:none}
+body:not(.worker-body) button{min-height:44px;border-radius:9px;box-shadow:none}
+body:not(.worker-body) input:not([type=checkbox]):not([type=radio]),body:not(.worker-body) select,body:not(.worker-body) textarea{min-height:44px;max-width:100%;font-size:16px;border-radius:9px}
+body:not(.worker-body) .sidebar .account-area{margin-top:auto;padding-top:24px;border-top:1px solid #e4e7ef;display:flex;flex-direction:column;align-items:stretch;gap:10px}
+body:not(.worker-body) .sidebar .agency-chip{display:flex;flex-direction:column;align-items:flex-start;white-space:normal;background:transparent;border:0;padding:0}
+.mobile-work-menu{display:none}
+#templateLayout{grid-template-columns:minmax(0,1fr)}
+#view-checklist-templates:not([data-workspace-mode=list]) .template-list-panel{display:none}
+#backToTemplateLibrary{margin-bottom:20px}
+.template-question-card textarea,.template-question-card input{scroll-margin-top:24px}
+.template-options .template-option-row{min-width:0}
+.template-option-row label{white-space:normal}
+.login-logo{width:220px;height:auto}.worker-body .worker-logo{max-height:56px;width:auto}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #008c82;outline-offset:3px}
+@media(max-width:900px){
+ body:not(.worker-body) .app-shell{display:block}
+ body:not(.worker-body) .sidebar{position:static;height:auto;padding:18px 20px;gap:12px}
+ body:not(.worker-body) .brand{margin:0}
+ body:not(.worker-body) .brand-logo{height:44px}
+ body:not(.worker-body) .nav-tabs{display:none}
+ .mobile-work-menu{display:grid;gap:5px;font-size:14px}
+ body:not(.worker-body) .sidebar .account-area{margin:0;padding-top:12px;display:flex;flex-direction:row;flex-wrap:wrap;align-items:center}
+ body:not(.worker-body) .sidebar .agency-chip{flex:1;min-width:160px}
+ body:not(.worker-body) .workspace{padding:24px 20px 40px}
+ body:not(.worker-body) h1{font-size:28px}
+ body:not(.worker-body) .panel{padding:18px}
+ .field-grid,.ai-draft-grid,.template-question-grid,.template-editor-grid{grid-template-columns:minmax(0,1fr)}
+ .template-layout,.page-grid{grid-template-columns:minmax(0,1fr)}
+ .button-row{flex-wrap:wrap}
+}
+
+.template-toolbar>div:first-child>.eyebrow,.template-toolbar>div:first-child>h2{display:none}
+.template-toolbar{flex-wrap:wrap;gap:18px}.template-toolbar>div:first-child{flex:1;min-width:220px}
+
+@media(max-width:900px){
+.master-region-head{flex-direction:column;align-items:stretch;gap:12px}
+.master-region-toggle{width:100%;min-width:0;white-space:normal}
+.master-region-actions{width:100%;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
+.institution-row-actions{flex-wrap:wrap;max-width:100%}
+.master-agency-item{flex-wrap:wrap;gap:8px}
+.master-agency-select{min-width:0;max-width:100%;white-space:normal}
+.master-region-children{padding-left:8px}
+}
+
+/* Shared administrator logo uses the existing home navigation action. */
+body:not(.worker-body) .brand-home{border:0;border-radius:0;background:transparent;text-align:left;cursor:pointer}
+body:not(.worker-body) .brand-home:focus-visible{outline:3px solid #008c82;outline-offset:5px;border-radius:4px}
+
+body:not(.worker-body) .admin-animated-logo{display:block;width:156.8px;height:56px;max-width:100%}
+@media(max-width:900px){body:not(.worker-body) .admin-animated-logo{width:123.2px;height:44px}}

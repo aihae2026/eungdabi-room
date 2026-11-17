@@ -1,0 +1,23 @@
+/* Keep the guide beside the home introduction without adding a separate row. */
+.user-guide-entry { display: none; flex: 0 0 auto; align-self: flex-end; }
+.workspace:has(#view-home.is-active) .user-guide-entry { display: flex; }
+body.v8-final .workspace:has(#view-home.is-active) .topbar { margin-bottom: 16px; }
+.user-guide-entry a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid #c7d9d3;
+  border-radius: 10px;
+  background: #fff;
+  color: #185b4e;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.user-guide-entry a:hover { background: #edf5f1; }
+.user-guide-entry a:focus-visible { outline: 3px solid #247c69; outline-offset: 3px; }
+@media (max-width: 600px) {
+  .user-guide-entry { align-self: flex-start; }
+}

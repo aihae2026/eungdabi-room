@@ -1,0 +1,184 @@
+{
+  "sourceCommit": "eb4cc19280f3026fd1ada356dbf52ff457aeb216",
+  "includedFiles": 361,
+  "packaging": "Expanded v8 source at repository root; original submission README and media retained; original source README preserved as SOURCE_README.md; duplicate archive removed; generated public and Git metadata excluded from file count",
+  "sourceArchiveFiles": 357,
+  "licenseScopeReview": "Root license notices and README links clarified; specific presentation and branding scope identified without revoking earlier valid grants; third-party licenses retained; no GitHub push performed at preparation time",
+  "revisionDate": "2026-11-09",
+  "revisionTopics": ["Static publication boundary", "Remove live access and personal sharing references from current submission documentation", "Stored XSS output encoding and submission input validation", "Remove browser plaintext passwords; eight-character intake minimum; explicit CORS; document remaining authentication risks"],
+  "revisionScope": "Submission repository files only; production and historical archives unchanged",
+  "freshInstallReview": "Regional seed sigungu normalized; explicit base table and sequence privileges; SQL order and read-only checks documented. 224 local tests passed on Node v24.22.2 and 256 public files built. No database installation or SQL execution performed.",
+  "headersDocumentation": "Static Permissions-Policy restricts camera, microphone, geolocation; CSP, internal error generalization and DB timeouts remain unimplemented development tasks",
+  "retentionDocumentation": "Soft-delete and audit copies disclosed; manual purge procedure documented; actual retention period unconfirmed; no code or database changes for this advisory",
+  "baselineArchiveFiles": 349,
+  "staticPublishDirectory": "public",
+  "staticPublishFiles": 256,
+  "verification": "223 local automated tests passed on Node v24.22.2; public build and syntax checks passed; mock server served landing/admin/intake HTML with HTTP 200; production routing, browser execution and database execution not tested",
+  "nodeValidation": { "version": "v24.22.2", "distribution": "node-v24.22.2-win-x64.zip", "sha256": "ca1bff5d8ead13c9f2ea404a176db46bd430704d5b5113734049fa365e7799e2", "runtimeIncludedInArchive": false, "node22ExecutionTested": false },
+  "excluded": [
+    {
+      "file": ".env.example",
+      "reason": "environment_file"
+    },
+    {
+      "file": "LifeSafetyInspection_Manual_Agency_Admin.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "LifeSafetyInspection_Manual_All_Roles.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "LifeSafetyInspection_Manual_Central_Admin.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "LifeSafetyInspection_Manual_Regional_Admin.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "LifeSafetyInspection_Manual_Worker.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "LifeSafetyInspection_Project_Summary.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "assets/guides/user-guide-v1.0.pdf",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "docs/AI_Challenge_Performance_Optimization_Worklog_KO.docx",
+      "reason": "unreviewed_document_or_archive"
+    },
+    {
+      "file": "docs/build_speed_optimization_brief.py",
+      "reason": "excluded_document_tooling"
+    },
+    {
+      "file": "docs/v8-design-evidence/manifest.json",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/mobile-ai-settings.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/mobile-checklist-templates.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/mobile-home.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/reference-ai-settings.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/reference-forms.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/reference-home.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/reference-master.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/reference-stats.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/reference-submissions.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/release-ai-settings.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/release-checklist-templates.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/release-dashboard.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/release-home.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/release-master.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "docs/v8-design-evidence/release-stats.png",
+      "reason": "unreviewed_screenshot"
+    },
+    {
+      "file": "outputs/README-final-submission-draft.md",
+      "reason": "development_output"
+    },
+    {
+      "file": "scripts/create_combined_manual.py",
+      "reason": "excluded_document_tooling"
+    },
+    {
+      "file": "scripts/update_manuals_with_screenshots.py",
+      "reason": "excluded_document_tooling"
+    },
+    {
+      "file": "scripts/verify_combined_manual.py",
+      "reason": "excluded_document_tooling"
+    },
+    {
+      "file": "scripts/verify_manual_text.py",
+      "reason": "excluded_document_tooling"
+    },
+    {
+      "file": "supabase/seed.sql",
+      "reason": "precreated_account_hashes_and_salts"
+    },
+    {
+      "file": "tests/recovery-browser.cjs",
+      "reason": "development_browser_auth_bridge"
+    },
+    {
+      "file": "tests/support/github-bridge.html",
+      "reason": "development_browser_auth_bridge"
+    },
+    {
+      "file": "tests/support/github-bridge.js",
+      "reason": "development_browser_auth_bridge"
+    }
+  ],
+  "modifiedFiles": [
+    "README.md",
+    "assets/app.js",
+    "assets/institutions.js",
+    "assets/intake.js",
+    "docs/EUNGDABIROOM_R9_DEPLOYMENT_HANDOFF.md",
+    "docs/KO_PII_INTEGRATION_PROPOSAL.md",
+    "docs/LANDING_PAGE_HANDOFF.md",
+    "docs/V8_FINAL_DESIGN_HANDOFF.md",
+    "docs/netlify-supabase-deployment.md",
+    "gas/README.md",
+    "gas/app.html",
+    "gas/index.html",
+    "gas/institutions.html",
+    "gas/intake-app.html",
+    "index.html",
+    "netlify/functions/api-legacy.cjs",
+    "scripts/generate-demo-institutions.mjs",
+    "scripts/generate-supabase-seed.mjs",
+    "supabase/institution-management-migration.sql",
+    "tests/api-checklist-templates.test.js",
+    "tests/support/synthetic_fixture.py"
+  ],
+  "credentialPatternFindings": 0
+}

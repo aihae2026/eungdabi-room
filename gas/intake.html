@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>생활안전점검 체크리스트 제출</title>
+    <style>
+      <?!= include('styles'); ?>
+    </style>
+  </head>
+  <body class="worker-body">
+    <main class="worker-screen">
+      <section class="worker-card">
+        <img class="worker-logo" src="assets/ai-safety-check-logo.svg" alt="AI 생활안전점검" />
+        <div class="worker-title">
+          <p class="eyebrow" id="workerAgencyName">가상 수행기관 001</p>
+          <h1>생활안전점검 체크리스트 제출</h1>
+        </div>
+
+        <section class="worker-step is-active" id="passwordStep">
+          <label class="stacked-field">
+            <span>기관 비밀번호</span>
+            <input id="workerAgencyPassword" type="password" placeholder="기관 비밀번호 입력" />
+          </label>
+          <button class="primary-button full-button" id="verifyAgencyPassword" type="button">접속하기</button>
+        </section>
+
+        <section class="worker-step" id="selectStep">
+          <div class="field-grid single">
+            <div class="worker-info-group worker-info-group-investigator">
+            <label>
+              <span>조사자 이름</span>
+              <input id="workerNameInput" type="text" placeholder="조사자 이름" />
+            </label>
+            <label>
+              <span>조사자 전화번호</span>
+              <input id="workerPhoneInput" type="tel" inputmode="numeric" placeholder="010-0000-0000" />
+            </label>
+            </div>
+
+            <div class="worker-info-group worker-info-group-client">
+            <label>
+              <span>대상자 성명</span>
+              <input id="clientNameInput" type="text" placeholder="대상자 성명" />
+            </label>
+            <label>
+              <span>대상자 성별</span>
+              <input id="clientGenderInput" type="hidden" />
+              <div class="gender-choice-group" role="radiogroup" aria-label="대상자 성별">
+                <button class="gender-choice" type="button" data-client-gender="여" role="radio" aria-checked="false">여</button>
+                <button class="gender-choice" type="button" data-client-gender="남" role="radio" aria-checked="false">남</button>
+              </div>
+            </label>
+            <label>
+              <span>대상자 생년월일</span>
+              <input id="clientBirthInput" type="date" />
+            </label>
+            </div>
+          </div>
+
+          <div class="checklist-picker" id="checklistPicker"></div>
+        </section>
+
+        <section class="worker-step" id="questionStep">
+          <div class="question-head">
+            <button class="secondary-button" id="backToSelect" type="button">목록으로</button>
+            <div>
+              <p class="eyebrow" id="selectedScaleMax">0점 만점</p>
+              <h2 id="selectedChecklistTitle">체크리스트</h2>
+            </div>
+          </div>
+          <div class="worker-score">
+            <span>현재 합계점수</span>
+            <strong id="workerTotalScore">0</strong>
+          </div>
+          <div class="worker-question-list" id="workerQuestionList"></div>
+          <label class="stacked-field">
+            <span>현장 메모 <em>(선택)</em></span>
+            <textarea id="fieldMemo" rows="4" placeholder="현장에서 확인한 특이사항을 입력하세요."></textarea>
+          </label>
+          <button class="primary-button full-button" id="submitChecklist" type="button">제출</button>
+        </section>
+      </section>
+    </main>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+      <?!= include('institutions'); ?>
+    </script>
+    <script>
+      <?!= include('intake-app'); ?>
+    </script>
+  </body>
+</html>

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>생활안전점검 어드민</title>
+    <style>
+      <?!= include('styles'); ?>
+    </style>
+  </head>
+  <body>
+    <section class="login-screen" id="loginScreen">
+      <form class="login-card" id="loginForm">
+        <img class="login-logo" src="assets/ai-safety-check-logo.svg" alt="AI 생활안전점검" />
+        <div>
+          <h1>생활안전점검 어드민</h1>
+        </div>
+        <label>
+          <span>로그인 ID</span>
+          <input id="loginId" type="text" autocomplete="username" placeholder="기관코드 입력" required />
+        </label>
+        <label>
+          <span>패스워드</span>
+          <input id="loginPassword" type="password" autocomplete="current-password" placeholder="기관 비밀번호 입력" required />
+        </label>
+        <button class="primary-button" type="submit">로그인</button>
+        <p class="login-help">로그인 ID는 기관코드, 패스워드는 기관 비밀번호와 동일합니다.</p>
+      </form>
+    </section>
+
+    <div class="app-shell is-hidden" id="appShell">
+      <aside class="sidebar" aria-label="어드민 메뉴">
+        <div class="brand">
+          <img class="brand-logo" src="assets/ai-safety-check-logo.svg" alt="AI 생활안전점검" />
+        </div>
+        <nav class="nav-tabs" aria-label="페이지 이동">
+          <button class="nav-tab is-active" data-view="home" type="button">조사 현황</button>
+          <button class="nav-tab" data-view="dashboard" type="button">제출 목록</button>
+          <button class="nav-tab" data-view="stats" type="button">집계 및 통계</button>
+          <button class="nav-tab" data-view="master" type="button">공용 마스터 링크</button>
+        </nav>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="workspaceRoleTitle">전담사회복지사 관리 화면</p>
+            <h1 id="pageTitle">조사 현황</h1>
+          </div>
+          <div class="account-area">
+            <div class="agency-chip">
+              <span id="accountRoleLabel">운영담당자</span>
+              <strong id="accountAgencyName">가상 수행기관 001</strong>
+            </div>
+            <button class="secondary-button central-password-button" id="openCentralPassword" type="button">비밀번호 변경</button>
+            <button class="secondary-button" id="logoutButton" type="button">로그아웃</button>
+          </div>
+        </header>
+
+        <section class="view" id="view-master">
+          <div class="page-grid">
+            <section class="panel regional-master-panel">
+              <div class="section-title">
+                <div>
+                  <h2>관리 대상 기관 목록</h2>
+                </div>
+                <span class="state active" id="regionalMasterCount">0개</span>
+              </div>
+              <label class="stacked-field master-search-field">
+                <span>기관 검색</span>
+                <input id="masterAgencySearch" type="search" placeholder="기관명, 기관코드, 시도, 시군구 검색" autocomplete="off" />
+              </label>
+              <div class="master-agency-list" id="masterAgencyList" aria-label="공용 마스터 링크 관리 대상 기관 목록"></div>
+            </section>
+
+            <section class="panel">
+              <div class="section-title">
+                <div>
+                  <h2>공용 마스터 링크</h2>
+                </div>
+                <span class="state active">사용 중</span>
+              </div>
+
+              <div class="field-grid">
+                <label>
+                  <span>시도</span>
+                  <input id="agencySido" readonly value="가상특별시" />
+                </label>
+                <label>
+                  <span>시군구</span>
+                  <input id="agencySigungu" readonly value="가상구 A" />
+                </label>
+                <label>
+                  <span>운영담당자명</span>
+                  <input id="agencyName" readonly value="가상 수행기관 001" />
+                </label>
+                <label>
+                  <span>기관코드</span>
+                  <input id="agencyCode" readonly value="SAMPLEAG001" />
+                </label>
+              </div>
+
+              <label class="stacked-field">
+                <span>조사자용 접속 링크</span>
+                <div class="copy-row">
+                  <input id="masterUrl" readonly value="?page=intake&agency=SAMPLEAG001" />
+                  <button class="secondary-button" id="copyLink" type="button">복사</button>
+                </div>
+              </label>
+
+              <div class="notice-box">
+                이 링크는 운영담당자 정보를 담은 고유 접속 링크입니다. 조사자은 별도 로그인 없이 링크에 접속한 뒤 기관 비밀번호를 입력하면 체크리스트를 제출할 수 있습니다.
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="section-title">
+                <div>
+                  <h2>기관 비밀번호 관리</h2>
+                </div>
+              </div>
+
+              <label class="stacked-field">
+                <span>현재 비밀번호</span>
+                <input id="currentPassword" type="text" value="REMOVED_DEFAULT_PASSWORD" />
+              </label>
+              <label class="stacked-field">
+                <span>새 비밀번호</span>
+                <input id="newPassword" type="password" placeholder="변경할 비밀번호 입력" />
+              </label>
+              <label class="stacked-field">
+                <span>새 비밀번호 확인</span>
+                <input id="confirmPassword" type="password" placeholder="한 번 더 입력" />
+              </label>
+
+              <div class="button-row">
+                <button class="primary-button" id="savePassword" type="button">비밀번호 저장</button>
+                <button class="secondary-button" id="resetPasswordFields" type="button">입력 초기화</button>
+              </div>
+
+              <dl class="audit-list">
+                <div>
+                  <dt>최근 변경일</dt>
+                  <dd id="passwordUpdatedAt">2026-07-06 11:20</dd>
+                </div>
+                <div>
+                  <dt>관리자</dt>
+                  <dd id="passwordAdminName">운영담당자</dd>
+                </div>
+              </dl>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-central-password">
+          <section class="panel central-password-panel">
+            <div class="section-title">
+              <div>
+                <p class="eyebrow">통합관리자 계정</p>
+                <h2>통합관리자 비밀번호 변경</h2>
+              </div>
+            </div>
+
+            <div class="field-grid single">
+              <label class="stacked-field">
+                <span>현재 비밀번호</span>
+                <input id="centralCurrentPassword" type="text" readonly value="REMOVED_DEFAULT_PASSWORD" />
+              </label>
+              <label class="stacked-field">
+                <span>새 비밀번호</span>
+                <input id="centralNewPassword" type="password" placeholder="변경할 비밀번호 입력" />
+              </label>
+              <label class="stacked-field">
+                <span>새 비밀번호 확인</span>
+                <input id="centralConfirmPassword" type="password" placeholder="한 번 더 입력" />
+              </label>
+            </div>
+
+            <div class="button-row">
+              <button class="primary-button" id="saveCentralPassword" type="button">통합관리자 비밀번호 저장</button>
+              <button class="secondary-button" id="resetCentralPasswordFields" type="button">입력 초기화</button>
+            </div>
+
+            <dl class="audit-list">
+              <div>
+                <dt>최근 변경일</dt>
+                <dd id="centralPasswordUpdatedAt">2026-07-06 11:20</dd>
+              </div>
+            </dl>
+          </section>
+        </section>
+
+        <section class="view is-active" id="view-home">
+          <div class="summary-grid" id="homeSummaryGrid"></div>
+
+          <div class="home-dashboard-grid">
+            <section class="panel home-recent-panel">
+              <div class="section-title">
+                <div>
+                  <h2>최근 제출 현황</h2>
+                </div>
+              </div>
+              <div class="home-recent-list" id="homeRecentList"></div>
+            </section>
+
+            <section class="panel home-stats-panel">
+              <div class="section-title">
+                <div>
+                  <h2>통계 요약</h2>
+                </div>
+              </div>
+              <div class="home-risk-summary" id="homeRiskSummary"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="view-dashboard">
+          <div class="summary-grid" id="summaryGrid"></div>
+
+          <section class="panel">
+            <div class="section-title">
+              <div>
+                <h2>체크리스트 제출 목록</h2>
+              </div>
+              <div class="table-actions">
+                <span class="bulk-status" id="bulkStatus">선택 0건</span>
+                <button class="secondary-button" id="bulkDeleteButton" type="button">선택 삭제</button>
+                <button class="secondary-button" id="exportCsv" type="button">CSV 다운로드</button>
+              </div>
+            </div>
+
+            <div class="toolbar">
+              <select class="regional-filter" id="filterSido" aria-label="시도">
+                <option value="">전체 시도</option>
+              </select>
+              <select class="regional-filter" id="filterSigungu" aria-label="시군구">
+                <option value="">전체 시군구</option>
+              </select>
+              <input class="regional-filter" id="filterAgencyCode" type="search" placeholder="운영담당자 코드" />
+              <input class="regional-filter" id="filterAgencyName" type="search" placeholder="운영담당자 명" />
+              <select id="filterType" aria-label="체크리스트 구분">
+                <option value="">전체 체크리스트</option>
+              </select>
+              <select id="filterStatus" aria-label="처리상태">
+                <option value="">전체 처리상태</option>
+                <option value="확인 대기">확인 대기</option>
+                <option value="확인 완료">확인 완료</option>
+              </select>
+              <label class="date-filter">
+                <span>시작일자</span>
+                <input id="filterStartDate" type="date" aria-label="조사 시작일자" />
+              </label>
+              <label class="date-filter">
+                <span>종료일자</span>
+                <input id="filterEndDate" type="date" aria-label="조사 종료일자" />
+              </label>
+              <input id="searchInput" type="search" placeholder="조사자명, 대상자명, 기관코드 검색" />
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th class="checkbox-cell">
+                      <input id="selectPageCheckbox" type="checkbox" aria-label="현재 페이지 전체 선택" />
+                    </th>
+                    <th>연번</th>
+                    <th class="scope-column">운영담당자</th>
+                    <th>체크리스트</th>
+                    <th>조사일자</th>
+                    <th>조사자</th>
+                    <th>대상자</th>
+                    <th>총점</th>
+                    <th>처리상태</th>
+                    <th>상세</th>
+                  </tr>
+                </thead>
+                <tbody id="submissionRows"></tbody>
+              </table>
+            </div>
+            <div class="pagination" id="paginationControls" aria-label="제출 목록 페이지"></div>
+          </section>
+        </section>
+
+        <section class="view" id="view-stats">
+          <section class="panel">
+            <div class="section-title">
+              <div>
+                <h2 id="statsSectionTitle">전체 조사건수(관리 대상 수)</h2>
+              </div>
+              <button class="secondary-button" id="exportStatsCsv" type="button">CSV 다운로드</button>
+            </div>
+
+            <div class="stats-meta">
+              <span id="statsAgencyName">운영담당자: 가상 수행기관 001</span>
+              <span id="statsAgencyCode">기관코드: SAMPLEAG001</span>
+            </div>
+
+            <div class="toolbar stats-filter-bar">
+              <select class="wide-scope-filter" id="statsFilterSido" aria-label="통계 시도">
+                <option value="">전체 시도</option>
+              </select>
+              <select class="wide-scope-filter" id="statsFilterSigungu" aria-label="통계 시군구">
+                <option value="">전체 시군구</option>
+              </select>
+            </div>
+
+            <div class="stats-tabs" role="tablist" aria-label="집계 및 통계 보기">
+              <button class="stats-tab is-active" type="button" data-stats-tab="overview">조사현황</button>
+              <button class="stats-tab" type="button" data-stats-tab="distribution">점수 분포도</button>
+            </div>
+
+            <div class="table-wrap stats-table-wrap" id="statsTableWrap">
+              <table class="stats-table">
+                <thead id="statsHead"></thead>
+                <tbody id="statsRows"></tbody>
+              </table>
+            </div>
+            <p class="table-note" id="statsTableNote">* 괄호 안 숫자는 운영담당자 관리 대상 수입니다.</p>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+    <aside class="detail-drawer" id="detailDrawer" aria-label="제출 상세 정보" aria-hidden="true">
+      <div class="drawer-head">
+        <div>
+          <p class="eyebrow">제출 상세</p>
+          <h2 id="drawerTitle">조사지 상세 정보</h2>
+        </div>
+        <button class="icon-button" id="closeDrawer" type="button" aria-label="상세 닫기">닫기</button>
+      </div>
+      <div class="drawer-body" id="detailContent"></div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script>
+      <?!= include('institutions'); ?>
+    </script>
+    <script>
+      <?!= include('app'); ?>
+    </script>
+  </body>
+</html>
